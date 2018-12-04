@@ -1,0 +1,15 @@
+[Unit]
+Description=Sensoricnet mqtt to influxdb forwarder
+After=network.target
+
+[Service]
+WorkingDirectory=/opt/mqtt-forwarder
+ExecStart=/opt/mqtt-forwarder/forwarder.py --mqtt-host 127.0.0.1 --mqtt-port 1883 --influx-host 127.0.0.1 --influx-user labka --influx-pass-file /opt/mqtt-forwarder/passwd.txt --influx-db SensoricNet --node-name SensoricNet
+User=sn-forwarder
+Group=sn-forwarder
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
+
